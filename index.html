@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#10131e"><link rel="icon" href="data:,"><title>Anime Rush: Multiverse Escape</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+  <canvas id="game" aria-label="Anime Rush game canvas"></canvas>
+  <div id="vignette"></div>
+  <header id="topbar" class="chrome"><div class="brand"><span class="brand-mark">✦</span><span>ANIME <b>RUSH</b><small>MULTIVERSE ESCAPE</small></span></div><div class="top-right"><span class="currency"><i>◈</i><b id="coin-total">00000</b></span><button class="icon-btn" id="audio-btn" title="Toggle sound">♫</button></div></header>
+  <section id="home" class="screen visible">
+    <div class="home-copy"><div class="eyebrow"><span class="pulse"></span> DIMENSIONAL BREACH DETECTED</div><h1>RUN BEYOND<br><em>YOUR LIMITS.</em></h1><p>Worlds are colliding. Choose your champion, master the rush, and outrun the end of everything.</p><div class="home-actions"><button class="primary" id="start-btn">ENTER THE RIFT <span>↗</span></button><button class="quiet" id="how-btn">HOW TO PLAY <span>＋</span></button></div><div class="home-stats"><div><b>04</b><small>WORLDS</small></div><div><b>13</b><small>CHAMPIONS</small></div><div><b>∞</b><small>WAYS TO RUN</small></div></div></div>
+    <div class="hero-card"><div class="hero-orbit"></div><div class="hero-sigil">影</div><div class="hero-figure" id="hero-figure"><span class="hero-cape"></span><span class="hero-head"><i></i></span><span class="hero-body"></span><span class="hero-leg left"></span><span class="hero-leg right"></span><span class="hero-aura"></span></div><div class="hero-caption"><small>FEATURED RUNNER · KONOHA</small><b id="hero-name">THE HIDDEN FLAME</b></div><div class="hero-index">01 <span>/ 13</span></div></div>
+    <div class="home-bottom"><span>AN ORIGINAL MULTIVERSE RUNNER</span><span>WASD / ARROWS · SWIPE TO MOVE</span></div>
+  </section>
+  <section id="characters" class="screen">
+    <div class="screen-head"><div><div class="eyebrow">01 — CHOOSE YOUR RUNNER</div><h2>SELECT <em>CHAMPION</em></h2></div><button class="back-btn" data-back="home">← BACK</button></div>
+    <div class="character-layout"><div class="character-detail" id="character-detail"></div><div class="roster-wrap"><div class="filter-row" id="character-filters"></div><div class="roster" id="roster"></div></div></div>
+    <div class="screen-footer"><span>CHAMPION ROSTER <b>13</b></span><span>All runners are ready to enter the rift</span><button class="primary character-continue" id="character-continue">CHOOSE THIS RUNNER <span>↗</span></button></div>
+  </section>
+  <section id="worlds" class="screen">
+    <div class="screen-head"><div><div class="eyebrow">02 — SET YOUR DESTINATION</div><h2>CHOOSE A <em>WORLD</em></h2></div><button class="back-btn" data-back="characters">← BACK</button></div>
+    <div class="world-grid" id="world-grid"></div><div class="world-bottom"><div class="world-selected" id="world-selected"></div><button class="primary" id="world-play">DROP INTO THE RIFT <span>↗</span></button></div>
+  </section>
+  <section id="howto" class="screen">
+    <div class="screen-head"><div><div class="eyebrow">QUICK FIELD GUIDE</div><h2>MASTER THE <em>RUSH</em></h2></div><button class="back-btn" data-back="home">← BACK</button></div>
+    <div class="guide-grid"><article><b>01</b><h3>SHIFT LANES</h3><p>Swipe left or right, or use ← → / A D to weave through the breach.</p><span>← &nbsp; →</span></article><article><b>02</b><h3>JUMP & SLIDE</h3><p>Leap over ground hazards. Slide beneath barriers. Timing is everything.</p><span>↑ &nbsp; ↓</span></article><article><b>03</b><h3>UNLEASH POWER</h3><p>Collect energy shards, then trigger your champion's signature ability.</p><span>SPACE / ⚡</span></article><article><b>04</b><h3>OUTRUN THE HUNTER</h3><p>One collision is a warning. A second lets the hunter close in. Keep moving.</p><span>RUN. SURVIVE.</span></article></div>
+  </section>
+  <section id="pause" class="screen modal-screen"><div class="modal-card"><div class="eyebrow">RIFT PAUSED</div><h2>TAKE A <em>BREATHER</em></h2><p>Your run is waiting. The hunter is not.</p><button class="primary wide" id="resume-btn">RESUME RUN <span>▶</span></button><button class="quiet wide" id="quit-btn">END THIS RUN <span>↗</span></button></div></section>
+  <section id="result" class="screen modal-screen"><div class="modal-card result-card"><div class="eyebrow" id="result-kicker">RUN COMPLETE</div><h2 id="result-title">THE RIFT <em>CLAIMS ALL</em></h2><p id="result-message">Every ending is another beginning.</p><div class="result-stats"><div><b id="result-distance">0</b><small>DISTANCE</small></div><div><b id="result-coins">0</b><small>SHARDS</small></div><div><b id="result-best">0</b><small>PERSONAL BEST</small></div></div><button class="primary wide" id="retry-btn">RUN IT BACK <span>↻</span></button><button class="quiet wide" id="result-home">RETURN TO BASE <span>↗</span></button></div></section>
+  <section id="game-ui" class="game-ui"><div class="game-hud"><div class="hud-left"><span class="hud-world" id="hud-world">HIDDEN LEAF</span><b id="hud-distance">0 <small>M</small></b><span id="health-display" class="health-display">♥ ♥</span></div><div class="boss-hud" id="boss-hud"><span>RIFT HUNTER</span><i><b id="boss-fill"></b></i></div><div class="hud-right"><span class="hud-shards">◈ <b id="hud-coins">0</b></span><button id="pause-btn" class="pause-btn">Ⅱ</button></div></div><div class="ability-hud"><span id="ability-title">SIGNATURE BURST</span><i><b id="energy-fill"></b></i><button id="ability-btn">✦ <span id="ability-short">POWER</span></button></div><div class="touch-controls"><button data-control="left">‹</button><button data-control="jump">↑</button><button data-control="slide">↓</button><button data-control="right">›</button></div></section>
+  <div id="toast" aria-live="polite"></div>
+</main>
+<script src="game.js"></script>
+</body></html>
